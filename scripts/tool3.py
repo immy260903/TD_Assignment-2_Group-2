@@ -19,6 +19,8 @@ if the stored file name is different than the referenced file name:
 reload all referenced assets
 '''
 
+workspace_path = cmds.workspace(q=True, rd=True)
+
 # Get all references in the scene
 references = cmds.file(query=True, reference=True) 
 updated_references = []
@@ -27,15 +29,15 @@ for ref in references:
 
 	# Get file path and version number of maya reference
 	ref_path = cmds.referenceQuery(ref, filename=True)
-	dir = os.path.dirname(ref_path)
+	relative_dir = os.path.relpath(os.path.dirname(ref_path), workspace_path)
+	print("Scanning directory: " + relative_dir)
 	maya_name = os.path.basename(ref_path)
 	maya_ver = re.search(r'\.v(\d+)\.', maya_name).group(1)
-	print(maya_ver)
 
 	# Compare version number in maya to version numbers on disk
-	new_ver = ""
+	new_ver = maya_ver
 	new_file = ""
-	for root, dirs, files in os.walk(dir):
+	for root, dirs, files in os.walk(os.path.join(workspace_path, relative_dir)):
 		for file in files:
 			match = re.search(r'\.v(\d+)\.', os.path.basename(file))
 			if match:
@@ -43,13 +45,18 @@ for ref in references:
 				if int(maya_ver) < int(ver):
 					new_ver = ver
 					new_file = file
+		break
 	
 	# If a new version was found, add it to the updated references
 	if new_file != "":
-		updated_references.append(os.path.join(dir, new_file))
+		tuple = (dir, maya_name, new_file)
+		updated_references.append(tuple)
+		print("Found new version: " + new_file)
+	else:
+		print("No new version found.")
 
 # If there are newer versions, replace the references
 if updated_references:
-	print("Newer versions found. Replacing references...")
+	print("Replacing references...")
 else:
 	print("All references are up-to-date.")
