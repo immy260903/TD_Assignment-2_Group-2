@@ -37,7 +37,8 @@ for ref in references:
 	# Compare version number in maya to version numbers on disk
 	new_ver = maya_ver
 	new_file = ""
-	for root, dirs, files in os.walk(os.path.join(workspace_path, relative_dir)):
+	absolute_dir = os.path.join(workspace_path, relative_dir)
+	for root, dirs, files in os.walk(absolute_dir):
 		for file in files:
 			match = re.search(r'\.v(\d+)\.', os.path.basename(file))
 			if match:
@@ -49,9 +50,9 @@ for ref in references:
 	
 	# If a new version was found, add it to the updated references
 	if new_file != "":
-		tuple = (dir, maya_name, new_file)
+		tuple = (absolute_dir, maya_name, new_file)
 		updated_references.append(tuple)
-		print("Found new version: " + new_file)
+		print("Found new version: " + str(new_file))
 	else:
 		print("No new version found.")
 
