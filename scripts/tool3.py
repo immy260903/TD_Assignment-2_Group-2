@@ -27,8 +27,12 @@ updated_references = []
 
 for ref in references:
 
+	print(ref)
+
 	# Get file path and version number of maya reference
 	ref_path = cmds.referenceQuery(ref, filename=True)
+	print(ref_path)
+
 	relative_dir = os.path.relpath(os.path.dirname(ref_path), workspace_path)
 	print("Scanning directory: " + relative_dir)
 	maya_name = os.path.basename(ref_path)
@@ -36,7 +40,7 @@ for ref in references:
 
 	# Compare version number in maya to version numbers on disk
 	new_ver = maya_ver
-	new_file = ""
+	new_path = ""
 	absolute_dir = os.path.join(workspace_path, relative_dir)
 	for root, dirs, files in os.walk(absolute_dir):
 		for file in files:
@@ -45,19 +49,26 @@ for ref in references:
 				ver = match.group(1)
 				if int(maya_ver) < int(ver):
 					new_ver = ver
-					new_file = file
+					new_path = file
 		break
 	
 	# If a new version was found, add it to the updated references
-	if new_file != "":
-		tuple = (absolute_dir, maya_name, new_file)
-		updated_references.append(tuple)
-		print("Found new version: " + str(new_file))
+	if new_path != "":
+		print("Found new version: " + str(new_path))
+
+		ref_node = cmds.referenceQuery(ref, referenceNode=True)
+		updated_references.append((ref_node, new_path))
 	else:
 		print("No new version found.")
 
 # If there are newer versions, replace the references
 if updated_references:
 	print("Replacing references...")
+	for ref_node, new_path in updated_references:
+		try:
+			cmds.file(new_path, loadReference = ref_node)
+			print(f"Replaced {new_path}")
+		except Exception as e:
+			print(f"Error replacing {new_path}: {e}")
 else:
 	print("All references are up-to-date.")
