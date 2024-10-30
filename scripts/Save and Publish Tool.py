@@ -4,6 +4,12 @@ import maya.cmds as cmds
 
 workspace_path = cmds.workspace(q=True, rd=True)
 
+def SaveModel():
+    print('hi')
+
+def SaveShot():
+    print('hi')
+
 # Save File Function (Parameters Filename)
 def SaveFile(fileName):
 
@@ -25,10 +31,10 @@ def PublishFile(fileName):
 # Save or Publish Tool Window Create function
 def SavePublishWindow():
     # - if this window already exists, delete this window
-    if cmds.window('cameraTools', exists = True):
-        cmds.deleteUI('cameraTools')
+    if cmds.window('savePublishTools', exists = True):
+        cmds.deleteUI('savePublishTools')
         
-    cmds.window('cameraTools', resizeToFitChildren=True)
+    cmds.window('savePublishTools', resizeToFitChildren=True)
     # - create new window column style
     cmds.columnLayout()
     
@@ -39,12 +45,27 @@ def SavePublishWindow():
 
     cmds.text('asset type')
     cmds.optionMenu('assetType')
+    cmds.menuItem( label='prop')
+    cmds.menuItem( label='character')
     cmds.text('asset name')
     cmds.textField('assetName')
+    cmds.button(label='Save', command='SaveModel()')
 
     cmds.separator(h=10)
-    cmds.text('Save Layout, animation or lighting sequence')
+    cmds.text('Save Layout, animation or lighting')
     cmds.separator(h=10)
+    cmds.text('sequence name')
+    cmds.textField('seqName')
+    cmds.text('sequence no.')
+    cmds.intField('seqNo')
+    cmds.text('type')
+    cmds.optionMenu('saveType')
+    cmds.menuItem( label='layout')
+    cmds.menuItem( label='animation')
+    cmds.menuItem( label='lighting')
+    cmds.button(label='Save', command='SaveShot()')
+
+    cmds.text()
     # - Add a textfield called Filename and give it a label "File name:"
     # - Create a button called Save and make it call Save File Function with Filename as its parameter when clicked
     # - Create a button called Publish and make it call Publish File Function with Filename as its parameter when clicked
