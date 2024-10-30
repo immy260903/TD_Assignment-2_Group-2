@@ -35,152 +35,152 @@ class MayaFileOpener:
                 "SetPiece": {
                     "Vase03": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "vase03", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "vase03", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "vase03", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "vase03", "model", "source")
                         }
                     },
                     "Armchair01": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "armchair01", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "armchair01", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "armchair01", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "armchair01", "model", "source")
                         }
                     },
                     "BigLamp01": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "bigLamp01", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "bigLamp01", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "bigLamp01", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "bigLamp01", "model", "source")
                         }
                     },
                     "Blocks01": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "blocks01", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "blocks01", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "blocks01", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "blocks01", "model", "source")
                         }
                     },
                     "Book01": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "book01", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "book01", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "book01", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "book01", "model", "source")
                         }
                     },
                     "Book02": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "book02", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "book02", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "book02", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "book02", "model", "source")
                         }
                     },
                     "BooksGroup01": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "booksGroup01", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "booksGroup01", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "booksGroup01", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "booksGroup01", "model", "source")
                         }
                     },
                     "BooksGroup02": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "booksGroup02", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "booksGroup02", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "booksGroup02", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "booksGroup02", "model", "source")
                         }
                     },
                     "BooksGroup03": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "booksGroup03", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "booksGroup03", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "booksGroup03", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "booksGroup03", "model", "source")
                         }
                     },
                     "Bookshelf01": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "bookshelf01", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "bookshelf01", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "bookshelf01", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "bookshelf01", "model", "source")
                         }
                     },
                     "Candles01": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "candles01", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "candles01", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "candles01", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "candles01", "model", "source")
                         }
                     },
                     "Candles02": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "candles02", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "candles02", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "candles02", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "candles02", "model", "source")
                         }
                     },
                     "CeilingLights01": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "ceilingLights01", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "ceilingLights01", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "ceilingLights01", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "ceilingLights01", "model", "source")
                         }
                     },
                     "CoffeeTable01": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "coffeeTable01", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "coffeeTable01", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "coffeeTable01", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "coffeeTable01", "model", "source")
                         }
                     },
                     "Couch01": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "couch01", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "couch01", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "couch01", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "couch01", "model", "source")
                         }
                     },
                     "Flowers01": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "flowers01", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "flowers01", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "flowers01", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "flowers01", "model", "source")
                         }
                     },
                     "Magazine01": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "magazine01", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "magazine01", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "magazine01", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "magazine01", "model", "source")
                         }
                     },
                     "PictureFrame01": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "pictureFrame01", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "pictureFrame01", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "pictureFrame01", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "pictureFrame01", "model", "source")
                         }
                     },
                     "RoomSkeleton01": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "roomSkeleton01", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "roomSkeleton01", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "roomSkeleton01", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "roomSkeleton01", "model", "source")
                         }
                     },
                     "Sculpture01": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "sculpture01", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "sculpture01", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "sculpture01", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "sculpture01", "model", "source")
                         }
                     },
                     "Sculpture02": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "sculpture02", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "sculpture02", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "sculpture02", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "sculpture02", "model", "source")
                         }
                     },
                     "Sculpture03": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "sculpture03", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "sculpture03", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "sculpture03", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "sculpture03", "model", "source")
                         }
                     },
                     "Template": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "template", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "template", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "template", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "template", "model", "source")
                         }
                     },
                     "Vase01": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "vase01", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "vase01", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "vase01", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "vase01", "model", "source")
                         }
                     },
                     "Vase02": {
                         "Model": {
-                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "vase02", "model"),
-                            "WIP": os.path.join(wip_path, "assets", "setPiece", "vase02", "model")
+                            "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "vase02", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "setPiece", "vase02", "model", "source")
                         }
                     }
                 },
