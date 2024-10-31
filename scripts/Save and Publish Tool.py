@@ -241,7 +241,7 @@ def PublishAnim():
     # same with props
     props = cmds.listRelatives('prop')
     for prop in props:
-        cacheFileName = shotName + "_" + prop + "_layout.v" + layoutVer
+        cacheFileName = shotName + "_" + prop + "_animation.v" + layoutVer
         fbxPath = cacheDir + "/fbx/" + cacheFileName
         usdPath = cacheDir + "/usd/" + cacheFileName
         cmds.select(prop)
