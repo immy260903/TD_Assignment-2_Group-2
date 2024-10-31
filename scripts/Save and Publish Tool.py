@@ -23,13 +23,16 @@ def SaveModel():
 def SaveShot():
     print('hi')
 
-# Save File Function (Parameters Filename)
+# Save File Function (Parameters Filename, Directory)
 def SaveFile(fileName, directory):
-
+    # find files in the given directory
     dir_list = os.listdir(directory)
     print(len(dir_list))
+    # if there is none, immediately give it version 1
     if len(dir_list) <= 0:
         fileName += ".v001.mb"
+
+    # else look for filenames with the same asset name
     else:
         sameFileFound = False
         highestVer = 1
@@ -38,13 +41,16 @@ def SaveFile(fileName, directory):
                 sameFileFound = True
                 break
         
+        # if there is a file with the same name, find the highest version
         if sameFileFound == True:
             for x in dir_list:
                 if fileName == x.split(".")[-3]:
                     fileVer = x.split(".")[-2]
                     if highestVer < int(fileVer.split("v")[-1]):
                         highestVer = int(fileVer.split("v")[-1])
+            highestVer += 1 
 
+        # increment the highest version by one and give that version to the filename
         fileVer = ".v" + str(highestVer).rjust(3, '0') + ".mb"
         fileName += fileVer
      
@@ -52,7 +58,8 @@ def SaveFile(fileName, directory):
     print(finalDir)
     # - Save the asset with the given version number
     cmds.select(all=True)
-    cmds.file(finalDir, f=True, type="mayaBinary",es=True, sa=True)
+    cmds.file(finalDir, f=True, type="mayaBinary",es=True)
+    cmds.select( clear=True )
 
 # Publish File Function (Parameters Filename)
 def PublishFile(fileName):
@@ -97,11 +104,11 @@ def SaveWindow():
     cmds.text('Save Model')
     cmds.separator(h=10)
 
-    cmds.text('asset type')
+    cmds.text('Asset type:')
     cmds.optionMenu('assetType')
     cmds.menuItem( label='prop')
     cmds.menuItem( label='character')
-    cmds.text('asset name')
+    cmds.text('Asset name:')
     cmds.textField('assetName')
     cmds.button(label='Save', command='SaveModel()')
 
