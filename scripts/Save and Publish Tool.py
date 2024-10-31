@@ -71,7 +71,7 @@ def SaveFile(fileName, directory):
         sameFileFound = False
         highestVer = 1
         for x in dir_list:
-            if fileName == x.split(".")[-2]:
+            if fileName == x.split(".")[0]:
                 sameFileFound = True
                 break
         
@@ -332,7 +332,7 @@ def PublishWindow():
     # Publish Asset section - asks for asset type, asset name and asset version
     cmds.separator(h=10)
     cmds.text('PUBLISH FILE')
-    cmds.text('Save Asset')
+    cmds.text('Publish Asset')
     cmds.separator(h=10)
 
     cmds.text('Asset type:')
@@ -352,7 +352,7 @@ def PublishWindow():
     # Publish Layout section - asks for sequence name, shot number and layout version
 
     cmds.separator(h=10)
-    cmds.text('Save Layout')
+    cmds.text('Publish Layout')
     cmds.separator(h=10)
     cmds.text('Sequence name:')
     cmds.textField('layoutSeqName')
@@ -369,7 +369,7 @@ def PublishWindow():
     # Publish Animation section - asks for sequence name, shot number and animation version
 
     cmds.separator(h=10)
-    cmds.text('Save Animation')
+    cmds.text('Publish Animation')
     cmds.separator(h=10)
     cmds.text('Sequence name:')
     cmds.textField('animSeqName')
