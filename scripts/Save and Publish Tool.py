@@ -21,7 +21,26 @@ def SaveModel():
 
 
 def SaveShot():
-    print('hi')
+    sequenceName = cmds.textField('seqName', query = True, text = True)
+    shotNo = str(cmds.intField('shotNo', query=True, value = True)).rjust(3, '0')
+    shotName = sequenceName + "_" + shotNo
+    saveType = cmds.optionMenu('saveType', query = True, value = True)
+    print(sequenceName)
+    print(shotName)
+    print(saveType)
+    sequenceDir = workspace_path + "wip/sequence/" + sequenceName
+    if os.path.exists(sequenceDir) == False:
+        os.mkdir(sequenceDir)
+    shotDir = sequenceDir + "/" + shotName
+    if os.path.exists(shotDir) == False:
+        os.mkdir(shotDir)
+        os.mkdir(shotDir + "/" + saveType)
+        os.mkdir(shotDir + "/" + saveType + "/source")
+    shotFileDirPath = shotDir + "/" + saveType + "/source/"
+    fileName = shotName + "_" + saveType
+    print(shotFileDirPath)
+    print(fileName)
+    SaveFile(fileName, shotFileDirPath)
 
 # Save File Function (Parameters Filename, Directory)
 def SaveFile(fileName, directory):
@@ -110,21 +129,25 @@ def SaveWindow():
     cmds.menuItem( label='character')
     cmds.text('Asset name:')
     cmds.textField('assetName')
+    cmds.separator(h=10)
+
     cmds.button(label='Save', command='SaveModel()')
 
     cmds.separator(h=30)
     cmds.text('Save Layout, animation or lighting')
     cmds.separator(h=10)
-    cmds.text('sequence name')
+    cmds.text('Sequence name:')
     cmds.textField('seqName')
-    cmds.text('sequence no.')
-    cmds.intField('seqNo')
-    cmds.text('type')
+    cmds.text('Shot number:')
+    cmds.intField('shotNo')
+    cmds.text('Type: ')
     cmds.separator(h=10)
     cmds.optionMenu('saveType')
     cmds.menuItem( label='layout')
     cmds.menuItem( label='animation')
     cmds.menuItem( label='lighting')
+    cmds.separator(h=10)
+
     cmds.button(label='Save', command='SaveShot()')
 
     cmds.showWindow('saveTools')
