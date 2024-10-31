@@ -138,7 +138,7 @@ def PublishLayout():
     cmds.select(all=True)
     cmds.file(filePath, f=True, type="mayaBinary",es=True)
     cmds.select( clear=True )
-    cacheFileName = shotName + "cam_layout.v" + layoutVer
+    cacheFileName = shotName + "_cam_layout.v" + layoutVer
     cacheDir = shotDir + "/layout/cache/"
     if os.path.exists(cacheDir) == False:
         os.mkdir(cacheDir)
@@ -153,11 +153,60 @@ def PublishLayout():
     cmds.file(fbxPath, f=True, type="FBX export",es=True)
     cmds.file(usdPath, f=True, type="USD export",es=True)
     cmds.select( clear=True)
-    # - Locate publish source directory
-    # - Search if Filename (without version number) exists in publish directory
-    # - Make a copy save of the filename in the publish directory
-    # - Create and export cache files for the savefile as .abc and .fbx
-    # - Save the cache files in the corresponding abc and fbx folders as Filename of current version
+
+def PublishAnim():
+    sequenceName = cmds.textField('animSeqName', query = True, text = True)
+    shotNo = str(cmds.intField('animShotNo', query=True, value = True)).rjust(3, '0')
+    shotName = sequenceName + "_" + shotNo
+    layoutVer = str(cmds.intField('animVer', query = True, value = True)).rjust(3, '0')
+    print(sequenceName)
+    print(shotName)
+
+    sequenceDir = workspace_path + "publish/sequence/" + sequenceName
+    if os.path.exists(sequenceDir) == False:
+        os.mkdir(sequenceDir)
+    shotDir = sequenceDir + "/" + shotName
+    if os.path.exists(shotDir) == False:
+        os.mkdir(shotDir)
+        os.mkdir(shotDir + "/animation")
+        os.mkdir(shotDir + "/animation/source")
+    shotFileDirPath = shotDir + "/animation/source/"
+    fileName = shotName + "_animation.v" + layoutVer
+    filePath = shotFileDirPath + fileName
+    print(filePath)
+
+    cmds.select(all=True)
+    cmds.file(filePath, f=True, type="mayaBinary",es=True)
+    cmds.select( clear=True)
+    
+    cacheDir = shotDir + "/animation/cache/"
+    if os.path.exists(cacheDir) == False:
+        os.mkdir(cacheDir)
+        os.mkdir(cacheDir + "/fbx")
+        os.mkdir(cacheDir + "/usd")
+
+    characters = cmds.listRelatives('character')
+    for character in characters:
+        cacheFileName = shotName + "_" + character + "_layout.v" + layoutVer
+        fbxPath = cacheDir + "/fbx/" + cacheFileName
+        usdPath = cacheDir + "/usd/" + cacheFileName
+        cmds.select(character)
+        cmds.file(fbxPath, f=True, type="FBX export",es=True)
+        cmds.file(usdPath, f=True, type="USD export",es=True)
+
+    props = cmds.listRelatives('prop')
+    for prop in props:
+        cacheFileName = shotName + "_" + prop + "_layout.v" + layoutVer
+        fbxPath = cacheDir + "/fbx/" + cacheFileName
+        usdPath = cacheDir + "/usd/" + cacheFileName
+        cmds.select(prop)
+        cmds.file(fbxPath, f=True, type="FBX export",es=True)
+        cmds.file(usdPath, f=True, type="USD export",es=True)
+
+    cmds.select( clear=True)
+
+    
+
 
 def SaveOrPublishWindow():
     # - if this window already exists, delete this window
@@ -271,6 +320,21 @@ def PublishWindow():
     cmds.separator(h=10)
 
     cmds.button(label='Publish Layout', command='PublishLayout()')
+
+    cmds.separator(h=10)
+    cmds.text('Save Animation')
+    cmds.separator(h=10)
+    cmds.text('Sequence name:')
+    cmds.textField('animSeqName')
+    cmds.text('Shot number:')
+    cmds.intField('animShotNo')
+    cmds.text('Animation version:')
+    cmds.intField('animVer')
+    cmds.separator(h=10)
+
+    cmds.separator(h=10)
+
+    cmds.button(label='Publish Animation', command='PublishAnim()')
 
     cmds.showWindow('publishTools')
 
