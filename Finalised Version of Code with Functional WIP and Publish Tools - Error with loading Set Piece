@@ -1,0 +1,153 @@
+import os
+import maya.cmds as cmds
+
+class MayaFileOpener:
+    def __init__(self, base_path, base_file, wip_path):
+        self.base_path = base_path
+        self.base_file = base_file
+        self.wip_path = wip_path
+        self.dept_paths = {
+            "Assets": {
+                "Prop": {
+                    "Car04": {
+                        "Model": {
+                            "Publish": os.path.join(base_path, "publish", "assets", "prop", "car04", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "prop", "car04", "model", "source")
+                        },
+                        "Rig": {
+                            "Publish": os.path.join(base_path, "publish", "assets", "prop", "car04", "rig", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "prop", "car04", "rig", "source")
+                        }
+                    }
+                },
+                "Character": {
+                    "SpiderBot01": {
+                        "Model": {
+                            "Publish": os.path.join(base_path, "publish", "assets", "character", "spiderBot01", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "character", "spiderBot01", "model", "source")
+                        },
+                        "Rig": {
+                            "Publish": os.path.join(base_path, "publish", "assets", "character", "spiderBot01", "rig", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "character", "spiderBot01", "rig", "source")
+                        }
+                    }
+                },
+                "SetPiece": {
+                    "Vase03": {
+                        "Publish": os.path.join(base_path, "publish", "assets", "setPiece", "vase03", "source"),
+                        "WIP": os.path.join(wip_path, "assets", "setPiece", "vase03", "source")
+                    },
+                },
+                "Set": {
+                    "LoungeRoom": {
+                        "Model": {
+                            "Publish": os.path.join(base_path, "publish", "assets", "set", "loungeRoom", "model", "source"),
+                            "WIP": os.path.join(wip_path, "assets", "set", "loungeRoom", "model", "source")
+                        }
+                    }
+                }
+            }
+        }
+        
+        # Open the base file
+        self.open_base_file()
+        
+        # Create the main window
+        if cmds.window("fileOpenerWindow", exists=True):
+            cmds.deleteUI("fileOpenerWindow")
+        self.window = cmds.window("fileOpenerWindow", title="Maya File Opener", widthHeight=(400, 200))
+        
+        # Create layout
+        cmds.columnLayout(adjustableColumn=True)
+        
+        # Dropdown for department (Assets, Shots)
+        self.dept_menu = cmds.optionMenu(label="Department", changeCommand=self.update_tasks)
+        cmds.menuItem(label="Assets")
+        cmds.menuItem(label="Shots")
+        
+        # Dropdown for asset/shot type (Prop, Character, SetPiece, Set, etc.)
+        self.type_menu = cmds.optionMenu(label="Type", changeCommand=self.update_names)
+        
+        # Dropdown for asset/shot name (Car04, SpiderBot01, etc.)
+        self.name_menu = cmds.optionMenu(label="Name", changeCommand=self.update_steps)
+        
+        # Dropdown for pipeline step (Model, Rig, etc.)
+        self.step_menu = cmds.optionMenu(label="Step", changeCommand=self.update_versions)
+        
+        # Dropdown for version (WIP or Publish)
+        self.version_menu = cmds.optionMenu(label="File Type")
+        cmds.menuItem(label="WIP")
+        cmds.menuItem(label="Publish")
+        
+        # Button to browse and open file
+        cmds.button(label="Open File", command=self.open_file)
+        
+        # Show the window
+        cmds.showWindow(self.window)
+        
+    def update_tasks(self, dept):
+        cmds.optionMenu(self.type_menu, edit=True, deleteAllItems=True)
+        for asset_type in self.dept_paths.get(dept, {}).keys():
+            cmds.menuItem(parent=self.type_menu, label=asset_type)
+        
+    def update_names(self, asset_type):
+        cmds.optionMenu(self.name_menu, edit=True, deleteAllItems=True)
+        selected_dept = cmds.optionMenu(self.dept_menu, query=True, value=True)
+        for asset_name in self.dept_paths[selected_dept][asset_type].keys():
+            cmds.menuItem(parent=self.name_menu, label=asset_name)
+        
+    def update_steps(self, asset_name):
+        cmds.optionMenu(self.step_menu, edit=True, deleteAllItems=True)
+        selected_dept = cmds.optionMenu(self.dept_menu, query=True, value=True)
+        selected_type = cmds.optionMenu(self.type_menu, query=True, value=True)
+        
+        steps = self.dept_paths[selected_dept][selected_type].get(asset_name, {}).keys()
+        for step in steps:
+            cmds.menuItem(parent=self.step_menu, label=step)
+        if not steps:
+            cmds.menuItem(parent=self.step_menu, label="")
+
+    def update_versions(self, step):
+        pass  # Add further logic here if needed for version updates
+    
+    def list_versions(self, file_path):
+        versions = [file for file in os.listdir(file_path) if file.endswith(".mb")]
+        return sorted(versions)
+    
+    def open_file(self, *args):
+        selected_dept = cmds.optionMenu(self.dept_menu, query=True, value=True)
+        selected_type = cmds.optionMenu(self.type_menu, query=True, value=True)
+        selected_name = cmds.optionMenu(self.name_menu, query=True, value=True)
+        selected_step = cmds.optionMenu(self.step_menu, query=True, value=True)
+        selected_version = cmds.optionMenu(self.version_menu, query=True, value=True)
+        
+        try:
+            file_path = self.dept_paths[selected_dept][selected_type][selected_name].get(selected_step, {}).get(selected_version)
+        except KeyError:
+            cmds.confirmDialog(title="Error", message="Invalid selection. Please check your choices.", button=["OK"])
+            return
+
+        versions = self.list_versions(file_path)
+        if versions:
+            latest_version = versions[-1]
+            file_to_open = os.path.join(file_path, latest_version)
+            if os.path.exists(file_to_open):
+                cmds.file(file_to_open, open=True, force=True)
+                cmds.confirmDialog(title="Success", message="File opened successfully!", button=["OK"])
+            else:
+                cmds.confirmDialog(title="Error", message="File not found!", button=["OK"])
+        else:
+            cmds.confirmDialog(title="Error", message="No versions found.", button=["OK"])
+
+    def open_base_file(self):
+        if os.path.exists(self.base_file):
+            cmds.file(self.base_file, open=True, force=True)
+            cmds.confirmDialog(title="Success", message="Base file opened successfully!", button=["OK"])
+        else:
+            cmds.confirmDialog(title="Error", message="Base file not found!", button=["OK"])
+
+# Initialize with paths
+base_folder_path = "C:/Users/imraa/Documents/UTS/Maya/Assessment2_Test_Assets_2024/Assessment2_Test_Assets_v002"
+wip_folder_path = "C:/Users/imraa/Documents/UTS/Maya/Assessment2_Test_Assets_2024/Assessment2_Test_Assets_v002/wip"
+base_file_path = "C:/Users/imraa/Documents/UTS/Maya/Assessment2_Test_Assets_2024/Assesment 2 Base File.mb"
+MayaFileOpener(base_folder_path, base_file_path, wip_folder_path)
