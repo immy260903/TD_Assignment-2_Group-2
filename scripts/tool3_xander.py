@@ -97,7 +97,7 @@ cmds.window('referenceUpdater', title="Reference Updater", resizeToFitChildren=T
 
 columnMain = cmds.columnLayout(adjustableColumn=True, columnAlign="center", rowSpacing=10)
 
-frame = cmds.frameLayout(label="LOG", collapsable=True, borderVisible=True, marginHeight=10, marginWidth=10, bgc=[0.05, 0.36, 0.36])
+frame = cmds.frameLayout(labelVisible=False, collapsable=False, borderVisible=False, marginHeight=10, marginWidth=10, bgc=[0.05, 0.36, 0.36])
 
 cmds.button(label = 'Scan and Update References', command = 'find_and_replace_new_reference_versions()', bgc=[0.0, 0.5, 0.5])
 cmds.text("log", label="", align="left")
