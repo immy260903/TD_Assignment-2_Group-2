@@ -2,6 +2,7 @@
 import os
 import maya.cmds as cmds
 
+
 # reference the workspace path so that the tool can function on anyone's device
 workspace_path = cmds.workspace(q=True, rd=True)
 
@@ -14,6 +15,7 @@ def SaveModel():
     # form a string of the path for the asset's directory
     assetDir = workspace_path + "wip/assets/" + assetType + "/" + assetName
     # if it doesn't exist, then create relevant directories
+
     if os.path.exists(assetDir) == False:
         os.mkdir(assetDir)
         os.mkdir(assetDir + "/model")
@@ -95,7 +97,6 @@ def SaveFile(fileName, directory):
     cmds.select(all=True)
     cmds.file(finalDir, f=True, type="mayaBinary",es=True)
     cmds.select( clear=True )
-
 def PublishAsset():
     # grab values from the tool window
     assetType = cmds.optionMenu('assetType', query = True, value = True)
@@ -297,7 +298,6 @@ def SaveWindow():
     cmds.text('Asset name:')
     cmds.textField('assetName')
     cmds.separator(h=10)
-
     cmds.button(label='Save Asset', command='SaveModel()')
     # Save Layout, animation or lighting section - asks for sequence name, shot number and save type
     cmds.separator(h=30)
