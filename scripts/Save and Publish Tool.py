@@ -83,7 +83,8 @@ def SaveFile(fileName, directory):
                     if highestVer < int(fileVer.split("v")[-1]):
                         highestVer = int(fileVer.split("v")[-1])
             highestVer += 1 
-
+        
+        print(sameFileFound)
         # increment the highest version by one and give that version to the filename
         fileVer = ".v" + str(highestVer).rjust(3, '0')
         fileName += fileVer
